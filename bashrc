@@ -115,7 +115,8 @@ alias la='ls -a --color=auto'
 alias l.='ls -ld .* --show-control-chars --color=auto'
 alias cls='clear'
 alias h='history'
-alias vi='vim'
+# alias vi='vim'
+alias vim='vi'
 alias which='alias | /usr/bin/which --tty-only --read-alias --show-dot --show-tilde'
 
 alias dstat='dstat -cdlmnpsyrt --socket --fs'
@@ -139,6 +140,10 @@ PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#I_#P") "$
 # 开启sudo的自动补全
 complete -cf sudo
 
+if [ "$TERM" == "screen"  ] ; then
+    PROMPT_COMMAND='echo -ne  "\033k`uname -n`\033\\"'
+fi
+
 # Start tmux on every shell login
 
 # Add the following snippet to start only one session (unless you start some manually), on login, try attach at first, only create a session if no tmux is running. and also checks tmux is installed before trying to launch it. It also tries to reattach you to an existing tmux session at logout, so that you can shut down every tmux session quickly from the same terminal at logout.
@@ -161,3 +166,5 @@ complete -cf sudo
 #		tmux attach-session -t "$ID" # if available attach to it
 #	fi
 #fi
+
+export ALL_PROXY=socks5://127.0.0.1:1080
